@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+{% bootstrap_messages %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Todo</title>
+</head>
+<body>
+<div class="span12 pagination-centered">
+<div class="col-md-4">
+    <div class="page-header">
+        <h1>Edit <b>{{ todo.todo }}</b></h1>
+        </div>
+{% bootstrap_form_errors form %}
+        <form id="todo_update_form" method='post' class="form" role="form" action='{% url 'todoupdateview' todo.id %}'>
+                {% csrf_token %}
+            {{ form|crispy }}
+            {% buttons %}
+            <button type="submit" class="btn btn-success">Save</button>
+            {% endbuttons %}
+        </form>
+    </div>
+    </div>
+</body>
+</html>
+{% endblock %}

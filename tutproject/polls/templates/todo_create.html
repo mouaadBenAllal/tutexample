@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="span12 pagination-centered">
+<div class="col-md-4">
+    <div class="page-header">
+        <h1>Add New Todo</h1>
+        </div>
+        <form  method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+
+</div>
+    </div>
+</body>
+</html>
+{% endblock %}

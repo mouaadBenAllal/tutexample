@@ -1,0 +1,10 @@
+<h1>Questions</h1>
+<ul>
+{% for question in question_list %}
+   {{ question.question_text }} | <a href="{% url 'myupdateview' question.id %}">Edit</a><a href = {%  url 'questiondelete' question.id %}>Delete</a><br>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'my-view'%}">Create new</a>

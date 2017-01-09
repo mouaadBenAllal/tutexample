@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" style="margin-top: 5%">
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Todo List</div>
+                    <div class="panel-body">
+                    </div>
+
+
+                    <!-- Table -->
+                    <table class="table">
+                        <table id="datatodo" class="table table-striped" style="position: center">
+                            <thead>
+                            <tr>
+                                <th>Todo</th>
+                                <th>User</th>
+                                <th>Date Published</th>
+                                <th>Done?</th>
+                                <th>Edit/Delete?</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                {% for todo in todo_list %}
+                                    <td><a href="{% url 'todoupdateview' todo.id %}">{{ todo.todo }}</a></td>
+                                    <td>{{ todo.user }}</td>
+
+                                    <td>{{ todo.pub_date }}</td>
+
+                                    <td>{% if todo.work == true %}
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    {% endif %}
+                                        {{ todo.work }}
+                                    </td>
+                                    <td>{% if todo.user == request.user %}
+                                        <form action="{% url 'tododelete' todo.id %}" method="POST"
+                                              style="display: inline">
+                                            {% csrf_token %}
+                                            <button class='btn btn-danger' type="submit" name="remove_levels"
+                                                    value="delete"
+                                                    onclick="return confirm('Are u sure you want to delete this?')">
+                                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                                delete
+                                            </button>
+                                        </form>
+                                        <a href="{% url 'todoupdateview' todo.id %}">
+                                            <button class="btn btn-info">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                Edit
+                                            </button>
+                                        </a>
+
+
+
+                                        </td>
+                                    {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
